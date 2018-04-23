@@ -180,8 +180,8 @@ mod rocket_support {
     use std::io::Cursor;
     use PreEscaped;
 
-    impl Responder<'a> for PreEscaped<String> {
-        fn respond_to(self, _: &Request) -> Result<Response<'a>, Status> {
+    impl Responder<'static> for PreEscaped<String> {
+        fn respond_to(self, _: &Request) -> Result<Response<'static>, Status> {
             Response::build()
                 .header(ContentType::HTML)
                 .sized_body(Cursor::new(self.0))
